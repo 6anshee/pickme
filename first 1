@@ -1,0 +1,45 @@
+using System;
+
+class Shape
+{
+    private string color;
+    private int x, y;
+
+    public Shape(string color, int x, int y)
+    {
+        this.color = color;
+        this.x = x;
+        this.y = y;
+    }
+
+    public virtual void Display()
+    {
+        Console.WriteLine($"Color: {color}, Center: ({x}, {y})");
+    }
+}
+
+class Circle : Shape
+{
+    private double radius;
+
+    public Circle(string color, int x, int y, double radius)
+        : base(color, x, y)
+    {
+        this.radius = radius;
+    }
+
+    public override void Display()
+    {
+        base.Display();
+        Console.WriteLine($"Radius: {radius}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Circle circle = new Circle("Red", 0, 0, 5.5);
+        circle.Display();
+    }
+}
