@@ -1,0 +1,119 @@
+using System;
+
+// Класс CPU
+class CPU
+{
+    public string Model { get; set; }
+    public int Cores { get; set; }
+
+    public CPU(string model, int cores)
+    {
+        Model = model;
+        Cores = cores;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine($"CPU {Model} with {Cores} cores is starting.");
+    }
+
+    public void Shutdown()
+    {
+        Console.WriteLine($"CPU {Model} is shutting down.");
+    }
+}
+
+// Класс RAM
+class RAM
+{
+    public string Type { get; set; }
+    public int Size { get; set; }
+
+    public RAM(string type, int size)
+    {
+        Type = type;
+        Size = size;
+    }
+
+    public void Load()
+    {
+        Console.WriteLine($"{Size}GB {Type} RAM is loading.");
+    }
+
+    public void Unload()
+    {
+        Console.WriteLine($"{Size}GB {Type} RAM is unloading.");
+    }
+}
+
+// Класс GPU
+class GPU
+{
+    public string Model { get; set; }
+    public int Memory { get; set; }
+
+    public GPU(string model, int memory)
+    {
+        Model = model;
+        Memory = memory;
+    }
+
+    public void Initialize()
+    {
+        Console.WriteLine($"GPU {Model} with {Memory}GB memory is initializing.");
+    }
+
+    public void Disable()
+    {
+        Console.WriteLine($"GPU {Model} is disabling.");
+    }
+}
+
+// Класс Computer
+class Computer
+{
+    private CPU cpu;
+    private RAM ram;
+    private GPU gpu;
+
+    public Computer(CPU cpu, RAM ram, GPU gpu)
+    {
+        this.cpu = cpu;
+        this.ram = ram;
+        this.gpu = gpu;
+    }
+
+    public void PowerOn()
+    {
+        Console.WriteLine("Computer is powering on...");
+        cpu.Start();
+        ram.Load();
+        gpu.Initialize();
+        Console.WriteLine("Computer is now on.");
+    }
+
+    public void PowerOff()
+    {
+        Console.WriteLine("Computer is powering off...");
+        gpu.Disable();
+        ram.Unload();
+        cpu.Shutdown();
+        Console.WriteLine("Computer is now off.");
+    }
+}
+
+// Пример использования классов
+class Program
+{
+    static void Main(string[] args)
+    {
+        CPU cpu = new CPU("Intel Core i7", 8);
+        RAM ram = new RAM("DDR4", 16);
+        GPU gpu = new GPU("NVIDIA GeForce GTX 1080", 8);
+
+        Computer computer = new Computer(cpu, ram, gpu);
+        computer.PowerOn();
+        Console.WriteLine();
+        computer.PowerOff();
+    }
+}
