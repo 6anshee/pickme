@@ -1,0 +1,69 @@
+using System;
+
+abstract class Employee
+{
+    public string Name { get; set; }
+
+    protected Employee(string name) => Name = name;
+
+    public abstract double CalculateSalary();
+}
+
+class HourlyEmployee : Employee
+{
+    private double hourlyRate;
+    private int hoursWorked;
+
+    public HourlyEmployee(string name, double hourlyRate, int hoursWorked)
+        : base(name)
+    {
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+
+    public override double CalculateSalary() => hourlyRate * hoursWorked;
+}
+
+class MonthlyEmployee : Employee
+{
+    private double monthlySalary;
+
+    public MonthlyEmployee(string name, double monthlySalary)
+        : base(name)
+    {
+        this.monthlySalary = monthlySalary;
+    }
+
+    public override double CalculateSalary() => monthlySalary;
+}
+
+class ContractEmployee : Employee
+{
+    private double contractAmount;
+
+    public ContractEmployee(string name, double contractAmount)
+        : base(name)
+    {
+        this.contractAmount = contractAmount;
+    }
+
+    public override double CalculateSalary() => contractAmount;
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Employee[] employees = 
+        {
+            new HourlyEmployee("Alice", 20.0, 160),
+            new MonthlyEmployee("Bob", 3000.0),
+            new ContractEmployee("Charlie", 5000.0)
+        };
+
+        foreach (var employee in employees)
+        {
+            Console.WriteLine($"{employee.Name}: Salary = {employee.CalculateSalary()}");
+        }
+    }
+}
