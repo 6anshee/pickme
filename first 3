@@ -1,0 +1,34 @@
+using System;
+
+class Vehicle
+{
+    public virtual void Drive() => Console.WriteLine("The vehicle is driving.");
+}
+
+class Car : Vehicle
+{
+    public override void Drive() => Console.WriteLine("The car is driving on the road.");
+}
+
+class Bicycle : Vehicle
+{
+    public override void Drive() => Console.WriteLine("The bicycle is pedaling on the bike path.");
+}
+
+class Boat : Vehicle
+{
+    public override void Drive() => Console.WriteLine("The boat is sailing on the water.");
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Vehicle[] vehicles = { new Car(), new Bicycle(), new Boat() };
+
+        foreach (var vehicle in vehicles)
+        {
+            vehicle.Drive();
+        }
+    }
+}
